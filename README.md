@@ -1,6 +1,5 @@
 # Projeto-Em-React
-
-App.jsx
+App.jsx:
 
 import { useEffect, useState } from 'react'
 import './App.css'
@@ -10,12 +9,14 @@ function App() {
   const [repositorios, setRepositorios] = useState([])
 
   useEffect(() => {
+    // Busca os dados do perfil no GitHub
     fetch('https://api.github.com/users/eduarda-nscmnt')
       .then(resposta => resposta.json())
       .then(dados => {
         setUsuario(dados)
       })
 
+    // Busca os repositórios do GitHub
     fetch('https://api.github.com/users/eduarda-nscmnt/repos')
       .then(resposta => resposta.json())
       .then(dados => {
@@ -39,7 +40,9 @@ function App() {
 
           <div className="perfil-informacoes">
 
-            <h1>Maria Eduarda P. do Nascimento</h1>
+            <h1>
+              Maria Eduarda P. do Nascimento
+            </h1>
 
             <p className="usuario">
               @{usuario?.login}
@@ -67,6 +70,8 @@ function App() {
 
         </div>
 
+
+        {/* FORMAÇÃO */}
         <div className="formacao-resumo">
 
           <p>
@@ -89,32 +94,20 @@ function App() {
       {/* SOBRE MIM */}
       <section className="sobre">
 
-        <div className="sobre-cabecalho">
-
-          <button>Sobre mim</button>
-          <button>Formação</button>
-          <button>Tecnologias</button>
-          <button>Objetivo</button>
-
-        </div>
+        <h2>Sobre mim</h2>
 
         <div className="sobre-conteudo">
 
           <div className="sobre-card">
-
-            <h3>Sobre mim</h3>
+            <h3>Nome</h3>
 
             <p>
-              Sou estudante de Desenvolvimento de Sistemas,
-              interessada em tecnologia e desenvolvimento
-              de software.
+              Maria Eduarda P. do Nascimento
             </p>
-
           </div>
 
 
           <div className="sobre-card">
-
             <h3>Formação</h3>
 
             <p>
@@ -124,23 +117,19 @@ function App() {
             <span>
               2024 — 2026
             </span>
-
           </div>
 
 
           <div className="sobre-card">
-
             <h3>Instituição</h3>
 
             <p>
               ECIT Mestre Sivuca - Severino Dias de Oliveira
             </p>
-
           </div>
 
 
           <div className="sobre-card">
-
             <h3>Tecnologias</h3>
 
             <div className="tecnologias">
@@ -151,7 +140,6 @@ function App() {
               <span>React</span>
 
             </div>
-
           </div>
 
 
@@ -160,10 +148,9 @@ function App() {
             <h3>Objetivo profissional</h3>
 
             <p>
-              Meu objetivo é atuar na área de desenvolvimento
-              de software, aprimorar meus conhecimentos em
-              tecnologia e futuramente cursar Análise e
-              Desenvolvimento de Sistemas.
+              Meu objetivo é atuar na área de desenvolvimento de software,
+              aprimorar meus conhecimentos em tecnologia e futuramente
+              cursar Análise e Desenvolvimento de Sistemas.
             </p>
 
           </div>
@@ -180,7 +167,7 @@ function App() {
 
         <div className="lista-repositorios">
 
-          {repositorios.slice(0, 2).map((repositorio) => (
+          {repositorios.map((repositorio) => (
 
             <div
               className="card-repositorio"
@@ -193,8 +180,7 @@ function App() {
 
               <p>
                 {repositorio.description ||
-                  'Projeto desenvolvido durante minha jornada de aprendizado.'
-                }
+                  'Projeto desenvolvido durante minha jornada de aprendizado.'}
               </p>
 
               <a
@@ -216,9 +202,9 @@ function App() {
     </main>
   )
 
-App.css:
-
-/* ================================
+  App.css:
+  
+  /* ================================
    CONFIGURAÇÃO GERAL
 ================================ */
 
@@ -242,6 +228,7 @@ main {
   max-width: 1000px;
 
   margin: 0 auto;
+
   padding: 50px 30px;
 }
 
@@ -260,6 +247,7 @@ main {
 
 .perfil-topo {
   display: flex;
+
   align-items: center;
 
   gap: 60px;
@@ -340,6 +328,7 @@ main {
 
 .github-info div {
   display: flex;
+
   align-items: center;
 
   gap: 7px;
@@ -392,7 +381,7 @@ main {
 
 
 /* ================================
-   MENU SOBRE MIM
+   SOBRE MIM
 ================================ */
 
 .sobre {
@@ -401,41 +390,14 @@ main {
   margin: 45px auto 0;
 }
 
-.sobre-cabecalho {
-  display: flex;
+.sobre h2 {
+  color: #c084fc;
 
-  justify-content: center;
+  text-align: center;
 
-  gap: 50px;
-
-  padding: 18px 0;
-
-  border-top: 1px solid #2a2035;
-  border-bottom: 1px solid #2a2035;
+  font-size: 28px;
 
   margin-bottom: 30px;
-}
-
-.sobre-cabecalho button {
-  background: none;
-
-  border: none;
-
-  color: #9f91ad;
-
-  font-size: 14px;
-
-  font-weight: bold;
-
-  cursor: pointer;
-
-  padding: 8px 5px;
-
-  transition: 0.3s;
-}
-
-.sobre-cabecalho button:hover {
-  color: #c084fc;
 }
 
 
@@ -500,6 +462,15 @@ main {
 
 
 /* ================================
+   OBJETIVO
+================================ */
+
+.objetivo {
+  grid-column: span 2;
+}
+
+
+/* ================================
    TECNOLOGIAS
 ================================ */
 
@@ -531,15 +502,6 @@ main {
 
 
 /* ================================
-   OBJETIVO
-================================ */
-
-.objetivo {
-  grid-column: span 2;
-}
-
-
-/* ================================
    PROJETOS
 ================================ */
 
@@ -561,6 +523,11 @@ main {
   margin-bottom: 30px;
 }
 
+
+/* ================================
+   LISTA DE PROJETOS
+================================ */
+
 .lista-repositorios {
   display: grid;
 
@@ -568,6 +535,11 @@ main {
 
   gap: 20px;
 }
+
+
+/* ================================
+   CARD DO PROJETO
+================================ */
 
 .card-repositorio {
   padding: 25px;
@@ -622,7 +594,7 @@ main {
 
 
 /* ================================
-   CELULAR
+   RESPONSIVIDADE
 ================================ */
 
 @media (max-width: 700px) {
@@ -660,18 +632,6 @@ main {
     text-align: center;
   }
 
-  .sobre-cabecalho {
-    gap: 15px;
-
-    overflow-x: auto;
-
-    justify-content: flex-start;
-  }
-
-  .sobre-cabecalho button {
-    white-space: nowrap;
-  }
-
   .sobre-conteudo {
     grid-template-columns: 1fr;
   }
@@ -684,7 +644,6 @@ main {
     grid-template-columns: 1fr;
   }
 
-}
-}
+}}
 
 export default App
